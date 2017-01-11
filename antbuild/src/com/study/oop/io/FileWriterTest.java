@@ -7,7 +7,6 @@ public class FileWriterTest {
 
 	public static void main(String[] args) {
 		FileWriter fw = null;
-
 		try {
 			fw = new FileWriter("E:\\Study\\MyGit\\Study\\antbuild\\src\\com\\study\\oop\\io\\TestFileWriter.txt");
 			for (int i = 0; i < 5000; i++) {

@@ -3,7 +3,7 @@ package com.study.oop.io;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class FileInputStreamTest {
+public class TestFileInputStream {
 
 	public static void main(String[] args) {
 		int b = 0;
