@@ -3,8 +3,8 @@ package com.study.oop.httpRq.eg;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +16,7 @@ public class HttpRequest {
 	public static String sendGet(String URL, String param) {
 		String result = null;
 		BufferedReader in = null;
+		HttpURLConnection connection;
 		try {
 			String urlNameString = URL + "?" + param;
 			
@@ -23,23 +24,30 @@ public class HttpRequest {
 			URL realUrl = new URL(urlNameString);
 			
 			//打开URL之间的连接。
-			URLConnection connection = realUrl.openConnection();
+			connection = (HttpURLConnection) realUrl.openConnection();
 			
-			//设置通用的请求属性。
-			connection.setRequestProperty("accept", "*/*");
-			connection.setRequestProperty("connection", "Keep-Alive");
-			connection.setRequestProperty("use-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			connection.setRequestMethod("GET");
 			
-			//建立实际连接
-			connection.connect();
+			System.out.println(connection.getRequestProperties());
 			
-			//获取返回信息
+//			//设置通用的请求属性。
+//			connection.setRequestProperty("accept", "*/*");
+//			connection.setRequestProperty("connection", "Keep-Alive");
+//			connection.setRequestProperty("use-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+//			
+//			//建立实际连接
+//			connection.connect();
+			
+			//获取返回的头信息
 			Map<String, List<String>> map = connection.getHeaderFields();
 			
 			//遍历所有的响应头字段
 			for(String key : map.keySet()){
 				System.out.println(key + "-->" + map.get(key));
 			}
+			
+//			System.out.println(connection.getResponseMessage());
+//			System.out.println(connection.getResponseCode());
 			
 			//定义BufferedReader输入流来读取URL的响应
 			in = new BufferedReader(new InputStreamReader(
@@ -73,19 +81,23 @@ public class HttpRequest {
 		String result = null;
 		PrintWriter out = null;
 		BufferedReader in = null;
+		HttpURLConnection connection = null;
 		try {
 			
 			//创建一个URL对象。
 			URL realUrl = new URL(url);
 			
 			//打开和URL之间的连接。
-			URLConnection connection = realUrl.openConnection();
+			connection = (HttpURLConnection) realUrl.openConnection();
 			
-			//设置通用的请求属性
-			connection.setRequestProperty("accept", "*/*");
-			connection.setRequestProperty("connection", "Keep-Alive");
-			connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+			//设置请求方法
+			connection.setRequestMethod("POST");
 			
+//			//设置通用的请求属性
+//			connection.setRequestProperty("accept", "*/*");
+//			connection.setRequestProperty("connection", "Keep-Alive");
+//			connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+//			
 			//发送POST请求必须设置如下两行
 			connection.setDoOutput(true);
 			connection.setDoInput(true);
@@ -96,8 +108,16 @@ public class HttpRequest {
 			//发送请求参数
 			out.print(param);
 			
-			//输出流的缓冲
+			//刷新该流的缓冲
 			out.flush();
+			
+			//获取返回的头信息
+			Map<String, List<String>> map = connection.getHeaderFields();
+			
+			//遍历所有的响应头字段
+			for(String key : map.keySet()){
+				System.out.println(key + "-->" + map.get(key));
+			}
 			
 			//定义BufferedReader输入流来读取URL的响应。
 			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
