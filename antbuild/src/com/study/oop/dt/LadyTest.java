@@ -1,5 +1,7 @@
 package com.study.oop.dt;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 class Animal {
@@ -51,8 +53,15 @@ public class LadyTest {
 
 	@Test
 	public void ladyTest() {
+		int[] i = new int[5];
+		for (int j = 0; j < i.length; j++) {
+			i[j] = j + 5;
+		}
+		System.out.println(Arrays.toString(i));
+		
 		Cat cat = new Cat("catName", "blue");
 		Lady ld = new Lady("lili", cat);
+		System.out.println("==========: " + ld.toString());
 		ld.myAmEnjoy();
 		Dog dog = new Dog("dogName", "Black");
 		Lady ld1 = new Lady("lala", dog);
