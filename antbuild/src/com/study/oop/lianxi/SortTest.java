@@ -2,7 +2,18 @@ package com.study.oop.lianxi;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 需求：
+ * 存在一串0和1的数字，以一个0带三个1的方式显示，并且打印下标。
+ * 如：
+ * 0
+ * 1,1,1
+ * 0
+ * 1,1,1
+ * 0
+ * 1,
+ * 
+ * */
 public class SortTest {
 
 	public static void main(String[] args) {
@@ -22,7 +33,6 @@ public class SortTest {
 		}
 		System.out.println(l1 + " " + l11);
 		System.out.println(l2 + " " + l22);
-//		int a = l2.size();
 		int pom = 0;
 		if(l1.size() > 0){
 			for (int j = 0; j < l1.size(); j++) {
@@ -30,11 +40,8 @@ public class SortTest {
 				System.out.println();
 				if(l2.size() > 0){
 					for (; pom < 3 * j + 3 && pom < l2.size(); pom ++) {
-//						if(a > 0){
 							System.out.print(l2.get(pom) + ":" + l22.get(pom) + ", ");
-//						}
 					}
-//					a = a - 3;
 				}
 				System.out.println();
 			}
