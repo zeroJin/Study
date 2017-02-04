@@ -34,10 +34,12 @@ public class GetMaxNum {
 //			System.out.println(in + " = " + map.get(in));
 //		}
 		
-		//遍历map的key
+		//遍历map
 		Iterator<Integer> it = set.iterator();
 		while(it.hasNext()){
+			//遍历map的key
 //			System.out.println(it.next()); 
+			//遍历map的Value
 			int v ;
 			v = map.get(it.next());
 			System.out.println("++" + v);
